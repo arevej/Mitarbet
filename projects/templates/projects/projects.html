@@ -1,5 +1,7 @@
+{% extends 'base.html' %}
+
+{% block content %}
 <h2>Projects</h2>
-<a href="/logout">Logout</a>
 
 {% if all_projects %}
 <ul>
@@ -12,3 +14,4 @@
 {% endif %}
 
 <a href="/projects/new">Start project</a>
+{% endblock %}
