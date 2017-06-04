@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.contrib.auth.models import User
 from django.contrib.auth import login, authenticate
-from django.urls import reverse 
+from django.urls import reverse
 
 
 def index(request):
@@ -21,6 +21,3 @@ def register(request):
             return HttpResponseRedirect(reverse('projects'))
         except Exception as e:
             return render(request, 'registration/registration.html', { 'error': str(e) })
-
-def projects(request):
-    return render(request, 'projects/projects.html', {})

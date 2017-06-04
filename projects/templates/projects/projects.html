@@ -1,0 +1,12 @@
+<h2>Projects</h2>
+<a href="/logout">Logout</a>
+
+{% if all_projects %}
+<ul>
+  {% for project in all_projects %}
+  <li>{{ project.project_name }}</li>
+  {% endfor %}
+</ul>
+{% else %}
+<p> No projects. </p>
+{% endif %}
