@@ -1,0 +1,13 @@
+<h2>Start your project</h2>
+
+{% if error %}
+  <p>{{error}}</p>
+{% endif %}
+
+
+<form method="post">
+  {% csrf_token %}
+  Name:
+  <input type="text" name="project_name" size="100">
+  <p><input type="submit" value="submit"></p>
+</form>

@@ -4,9 +4,11 @@
 {% if all_projects %}
 <ul>
   {% for project in all_projects %}
-  <li>{{ project.project_name }}</li>
+  <li><a href="/projects/{{ project.id }}">{{ project.project_name }}</a></li>
   {% endfor %}
 </ul>
 {% else %}
 <p> No projects. </p>
 {% endif %}
+
+<a href="/projects/new">Start project</a>
