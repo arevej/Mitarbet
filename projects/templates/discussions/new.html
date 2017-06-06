@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<a href="/projects/{{project.id}}">{{project.project_name}}</a>
+<h2>Start your discussion</h2>
+
+{% if error %}
+  <p>{{error}}</p>
+{% endif %}
+
+<form method="post">
+  {% csrf_token %}
+  Name:
+  <input type="text" name="discussion_name" size="100">
+  <p><input type="submit" value="submit"></p>
+</form>
+{% endblock %}

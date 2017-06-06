@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<a href="/projects/{{project.id}}">{{project.project_name}}</a>
+<h2>Discussions</h2>
+<ul>
+{% for discussion in all_discussions %}
+<li><a href="/projects/{{project.id}}/discussions/{{discussion.id}}">{{discussion.discussion_name}}</a></li>
+{% endfor %}
+</ul>
+
+<a href="/projects/{{project.id}}/discussions/new">Add</a>
+{% endblock %}

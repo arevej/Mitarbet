@@ -28,4 +28,8 @@ urlpatterns = [
     url(r'^projects/$', projects_views.index, name='projects'),
     url(r'^projects/new/$', projects_views.add_project, name='add_project'),
     url(r'^projects/(?P<project_id>[0-9]+)/$', projects_views.project, name='project'),
+    url(r'^projects/(?P<project_id>[0-9]+)/discussions/$', projects_views.discussion_list, name='discussion_list'),
+    url(r'^projects/(?P<project_id>[0-9]+)/discussions/new/$', projects_views.add_discussion, name='add_discussion'),
+    url(r'^projects/(?P<project_id>[0-9]+)/discussions/(?P<discussion_id>[0-9]+)/$', projects_views.discussion, name='discussion'),
+    url(r'^projects/(?P<project_id>[0-9]+)/discussions/(?P<discussion_id>[0-9]+)/comment/$', projects_views.comment, name='comment'),
 ]
