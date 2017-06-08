@@ -1,7 +1,7 @@
-{% extends 'base.html' %}
+{% extends 'base_project.html' %}
 
-{% block content %}
-<a href="/projects/{{project.id}}">{{project.project_name}}</a>
+{% block project_content %}
+
 <h2>{{discussion.discussion_name}}</h2>
 
 <h3>Comments</h3>
@@ -11,7 +11,7 @@
   {% endfor%}
 </ul>
 
-<form action="/projects/{{project.id}}/discussions/{{discussion.id}}/comment/" method="post">
+<form action="{% url 'comment' project.id discussion.id %}" method="post">
   {% csrf_token %}
   Comment:<br/>
   <textarea name="comment_text" rows="8" cols="80"></textarea>

@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Project, Discussion, Comment
+from .models import Project, Discussion, Comment, User
 import datetime
 from django.http import HttpResponseRedirect
 from django.urls import reverse
@@ -57,3 +57,15 @@ def comment(request, project_id, discussion_id):
     comment_text = request.POST['comment_text']
     discussion.comment_set.create(comment_text=comment_text, creation_date=datetime.datetime.today(), user=user)
     return HttpResponseRedirect(reverse('discussion', args=(project.id,discussion_id)))
+
+def edit_project(request, project_id):
+    project = Project.objects.get(pk=project_id)
+    all_developers = User.objects.exclude(project__id=project_id)
+    return render(request, 'projects/edit.html', {'project': project, 'all_developers': all_developers})
+
+def add_developer(request, project_id):
+    project = Project.objects.get(pk=project_id)
+    developer_id = request.POST['developer_id']
+    developer = User.objects.get(pk=developer_id)
+    project.developers.add(developer)
+    return HttpResponseRedirect(reverse('edit_project', args=(project.id,)))

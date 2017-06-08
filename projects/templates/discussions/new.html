@@ -1,7 +1,6 @@
-{% extends 'base.html' %}
+{% extends 'base_project.html' %}
 
-{% block content %}
-<a href="/projects/{{project.id}}">{{project.project_name}}</a>
+{% block project_content %}
 <h2>Start your discussion</h2>
 
 {% if error %}

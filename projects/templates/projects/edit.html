@@ -1,0 +1,28 @@
+{% extends 'base_project.html' %}
+
+{% block project_content %}
+<h4>Developers</h4>
+
+{% if project.developers.all %}
+<ul>
+  {% for developer in project.developers.all %}
+  <li>{{ developer.username }}</li>
+  {% endfor %}
+</ul>
+{% else %}
+<p>No developers assigned.</p>
+{% endif%}
+
+<form action="{% url 'add_developer' project.id %}" method="post">
+  {% csrf_token %}
+  <select name="developer_id">
+    {% for developer in all_developers %}
+    <option value="{{ developer.id }}">{{ developer.username }}</option>
+    {% endfor %}
+  </select>
+  <button type="submit">Assign</button>
+</form>
+
+
+
+{% endblock %}

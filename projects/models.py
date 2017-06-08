@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 class Project(models.Model):
     project_name = models.CharField(max_length=100)
     creation_date = models.DateField()
+    developers = models.ManyToManyField(User)
 
 class Discussion(models.Model):
     project = models.ForeignKey(Project, on_delete=models.CASCADE)

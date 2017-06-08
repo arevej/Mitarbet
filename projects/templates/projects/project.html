@@ -1,7 +1,8 @@
-{% extends 'base.html' %}
+{% extends 'base_project.html' %}
 
-{% block content %}
+{% block project_content %}
 <h2>{{project.project_name}}</h2>
 <p>{{project.creation_date}}</p>
-<a href="/projects/{{project.id}}/discussions">Discussions</a>
+<a href="{% url 'discussion_list' project.id %}">Discussions</a>
+<a href="{% url 'edit_project' project.id %}">Settings</a>
 {% endblock %}
