@@ -21,10 +21,12 @@ from projects import views as projects_views
 
 
 
+
 urlpatterns = [
     url(r'^login/$', auth_views.login, name='login'),
     url(r'^logout/$', auth_views.logout,{'next_page':'/login'}, name='logout'),
     url(r'^register/$', views.register, name='register'),
+    url(r'^profile/(?P<username>[a-zA-Z0-9]+)/$', views.profile, name='profile'),
     url(r'^projects/$', projects_views.index, name='projects'),
     url(r'^projects/new/$', projects_views.add_project, name='add_project'),
     url(r'^projects/(?P<project_id>[0-9]+)/$', projects_views.project, name='project'),

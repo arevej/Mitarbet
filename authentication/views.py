@@ -3,6 +3,7 @@ from django.http import HttpResponseRedirect
 from django.contrib.auth.models import User
 from django.contrib.auth import login, authenticate
 from django.urls import reverse
+from projects.models import Project
 
 
 def index(request):
@@ -21,3 +22,8 @@ def register(request):
             return HttpResponseRedirect(reverse('projects'))
         except Exception as e:
             return render(request, 'registration/registration.html', { 'error': str(e) })
+
+def profile(request, username):
+    user = User.objects.get(username=username)
+    projects = Project.objects.filter(developers__id=user.id)
+    return render(request, 'profile/profile.html',{'user': user, 'projects':projects})

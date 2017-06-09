@@ -6,7 +6,7 @@
 {% if project.developers.all %}
 <ul>
   {% for developer in project.developers.all %}
-  <li>{{ developer.username }}</li>
+  <li><a href="{% url 'profile' developer.username %}">{{ developer.username }}</a></li>
   {% endfor %}
 </ul>
 {% else %}
