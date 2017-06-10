@@ -1,17 +1,6 @@
 {% extends 'base_project.html' %}
 
 {% block project_content %}
-<h4>Developers</h4>
-
-{% if project.developers.all %}
-<ul>
-  {% for developer in project.developers.all %}
-  <li><a href="{% url 'profile' developer.username %}">{{ developer.username }}</a></li>
-  {% endfor %}
-</ul>
-{% else %}
-<p>No developers assigned.</p>
-{% endif%}
 
 <form action="{% url 'wiki' project.id %}" method="post">
   {% csrf_token %}
@@ -19,6 +8,21 @@
   <textarea name="wiki" rows="8" cols="80">{{project.wiki}}</textarea>
   <p><button type="submit">Update</button></p>
 </form>
+
+<h4>Developers</h4>
+
+{% if project.developers.all %}
+<ul>
+  {% for developer in project.developers.all %}
+  <li>
+    <a href="{% url 'profile' developer.username %}">{{ developer.username }}</a>
+    <a href="{% url 'delete_developer' project.id developer.id %}">x</a>
+  </li>
+  {% endfor %}
+</ul>
+{% else %}
+<p>No developers assigned.</p>
+{% endif%}
 
 <form action="{% url 'add_developer' project.id %}" method="post">
   {% csrf_token %}
@@ -29,7 +33,5 @@
   </select>
   <button type="submit">Assign</button>
 </form>
-
-
 
 {% endblock %}

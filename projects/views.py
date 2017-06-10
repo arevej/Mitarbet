@@ -69,10 +69,15 @@ def edit_project(request, project_id):
         project.save()
         return HttpResponseRedirect(reverse('project', args=(project.id,)))
 
-
 def add_developer(request, project_id):
     project = Project.objects.get(pk=project_id)
     developer_id = request.POST['developer_id']
     developer = User.objects.get(pk=developer_id)
     project.developers.add(developer)
+    return HttpResponseRedirect(reverse('edit_project', args=(project.id,)))
+
+def delete_developer(request, project_id, developer_id):
+    project = Project.objects.get(pk=project_id)
+    developer = User.objects.get(pk=developer_id)
+    project.developers.remove(developer)
     return HttpResponseRedirect(reverse('edit_project', args=(project.id,)))
