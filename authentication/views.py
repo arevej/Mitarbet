@@ -27,3 +27,12 @@ def profile(request, username):
     user = User.objects.get(username=username)
     projects = Project.objects.filter(developers__id=user.id)
     return render(request, 'profile/profile.html',{'user': user, 'projects':projects})
+
+def edit_profile(request):
+    user = request.user
+    if request.method == 'GET':
+        return render(request, 'profile/edit.html', {'user': user})
+    else:
+        user.profile.avatar = request.FILES['avatar']
+        user.profile.save()
+        return HttpResponseRedirect(reverse('profile', args=(user.username,)))

@@ -8,7 +8,16 @@
 <h3>Comments</h3>
 <ul>
   {% for comment in discussion.comment_set.all %}
-  <li><a href="{% url 'profile' comment.user.username %}">{{comment.user.username}}</a>: {{comment.comment_text | markdown | safe}} {{comment.creation_date}} </li>
+  <li>
+    <a href="{% url 'profile' comment.user.username %}">
+      {% if comment.user.profile.avatar %}
+      <img src="/{{ comment.user.profile.avatar }}" height="20" width="20">
+      {% endif %}
+      {{comment.user.username}}
+    </a> on <i>{{comment.creation_date}}</i>:
+
+    {{comment.comment_text | markdown | safe}}
+  </li>
   {% endfor%}
 </ul>
 
