@@ -1,7 +1,13 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<a href="{% url 'project' project.id %}">{{project.project_name}}</a>
+<div class="project-menu">
+  <a href="{% url 'project' project.id %}">{{project.project_name}}</a>
+  <div>
+    <a href="{% url 'discussion_list' project.id %}">Discussions</a>
+    <a href="{% url 'edit_project' project.id %}">Settings</a>
+  </div>
+</div>
 {% block project_content %}
 {% endblock %}
 

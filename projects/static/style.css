@@ -1,0 +1,33 @@
+body {
+  font-size: 22px;
+  font-family: Helvetica;
+}
+
+.container {
+  width: 1000px;
+  margin: 0 auto;
+}
+
+.top-menu {
+  font-size: 25px;
+  padding: 10px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+a {
+  color: #5400f0;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+a:hover {
+  color: #220061;
+}
+
+.project-menu {
+  padding: 10px 0;
+  display: flex;
+  justify-content: space-between;
+}
