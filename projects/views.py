@@ -1,8 +1,8 @@
-from django.shortcuts import render
-from .models import Project, Discussion, Comment, User
 import datetime
+from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.urls import reverse
+from .models import Project, Discussion, Comment, User
 
 def index(request):
     all_projects = Project.objects.order_by('-creation_date')
@@ -17,7 +17,7 @@ def add_project(request):
         try:
             if project_name == '':
                 raise Exception('Name cannot be blank')
-            project = Project.objects.create(project_name=project_name, creation_date=datetime.datetime.today())
+            project = Project.objects.create(project_name=project_name, creation_date=datetime.datetime.today(), wiki='')
             return HttpResponseRedirect(reverse('project', args=(project.id,)))
         except Exception as e:
             return render(request, 'projects/new.html', {'error': str(e)})
@@ -61,7 +61,14 @@ def comment(request, project_id, discussion_id):
 def edit_project(request, project_id):
     project = Project.objects.get(pk=project_id)
     all_developers = User.objects.exclude(project__id=project_id)
-    return render(request, 'projects/edit.html', {'project': project, 'all_developers': all_developers})
+    if request.method == "GET":
+        return render(request, 'projects/edit.html', {'project': project, 'all_developers': all_developers})
+    else:
+        wiki = request.POST['wiki']
+        project.wiki=wiki
+        project.save()
+        return HttpResponseRedirect(reverse('project', args=(project.id,)))
+
 
 def add_developer(request, project_id):
     project = Project.objects.get(pk=project_id)

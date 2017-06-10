@@ -13,6 +13,13 @@
 <p>No developers assigned.</p>
 {% endif%}
 
+<form action="{% url 'wiki' project.id %}" method="post">
+  {% csrf_token %}
+  Wiki:<br/>
+  <textarea name="wiki" rows="8" cols="80">{{project.wiki}}</textarea>
+  <p><button type="submit">Update</button></p>
+</form>
+
 <form action="{% url 'add_developer' project.id %}" method="post">
   {% csrf_token %}
   <select name="developer_id">

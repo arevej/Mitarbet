@@ -1,8 +1,13 @@
 {% extends 'base_project.html' %}
+{% load markdown %}
 
 {% block project_content %}
 <h2>{{project.project_name}}</h2>
 <p>{{project.creation_date}}</p>
 <a href="{% url 'discussion_list' project.id %}">Discussions</a>
 <a href="{% url 'edit_project' project.id %}">Settings</a>
+
+<div class="wiki">
+  {{ project.wiki | markdown | safe }}
+</div>
 {% endblock %}

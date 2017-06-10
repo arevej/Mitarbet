@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 
 class Project(models.Model):
     project_name = models.CharField(max_length=100)
+    wiki = models.CharField(max_length=100000)
     creation_date = models.DateField()
     developers = models.ManyToManyField(User)
 
