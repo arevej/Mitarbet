@@ -21,7 +21,7 @@ from projects import views as projects_views
 from django.contrib import admin
 from django.conf import settings
 
-
+import os
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -33,6 +33,8 @@ urlpatterns = [
     url(r'^projects/$', projects_views.index, name='projects'),
     url(r'^projects/new/$', projects_views.add_project, name='add_project'),
     url(r'^projects/(?P<project_id>[0-9]+)/$', projects_views.project, name='project'),
+    url(r'^projects/(?P<project_id>[0-9]+)/files/new/$', projects_views.add_file, name='add_file'),
+    url(r'^projects/(?P<project_id>[0-9]+)/files/(?P<file_id>[0-9]+)/delete/$', projects_views.delete_file, name='delete_file'),
     url(r'^projects/(?P<project_id>[0-9]+)/edit/$', projects_views.edit_project, name='edit_project'),
     url(r'^projects/(?P<project_id>[0-9]+)/edit/wiki$', projects_views.edit_project, name='wiki'),
     url(r'^projects/(?P<project_id>[0-9]+)/developers/$', projects_views.add_developer, name='add_developer'),
@@ -43,4 +45,5 @@ urlpatterns = [
     url(r'^projects/(?P<project_id>[0-9]+)/discussions/(?P<discussion_id>[0-9]+)/comment/$', projects_views.comment, name='comment'),
 ]
 
-urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+urlpatterns += static('/images/', document_root=os.path.join(settings.BASE_DIR, 'images'))
+urlpatterns += static('/files/', document_root=os.path.join(settings.BASE_DIR, 'files'))

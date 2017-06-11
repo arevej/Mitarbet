@@ -2,7 +2,8 @@ import datetime
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.urls import reverse
-from .models import Project, Discussion, Comment, User
+from django.contrib.auth.models import User
+from .models import Project, Discussion, Comment, File
 
 def index(request):
     all_projects = Project.objects.order_by('-creation_date')
@@ -81,3 +82,18 @@ def delete_developer(request, project_id, developer_id):
     developer = User.objects.get(pk=developer_id)
     project.developers.remove(developer)
     return HttpResponseRedirect(reverse('edit_project', args=(project.id,)))
+
+def add_file(request, project_id):
+    project = Project.objects.get(pk=project_id)
+    file = request.FILES['file']
+    file_name = request.POST['file_name']
+    if file_name == '':
+        return HttpResponseRedirect(reverse('project', args=(project.id,)))
+    project.file_set.create(file=file, file_name=file_name, creation_date=datetime.datetime.today())
+    return HttpResponseRedirect(reverse('project', args=(project.id,)))
+
+def delete_file(request, project_id, file_id):
+    project = Project.objects.get(pk=project_id)
+    file = File.objects.get(pk=file_id)
+    file.delete()
+    return HttpResponseRedirect(reverse('project', args=(project.id,)))

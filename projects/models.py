@@ -17,3 +17,9 @@ class Comment(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     comment_text = models.CharField(max_length=10000)
     creation_date = models.DateField()
+
+class File(models.Model):
+    project = models.ForeignKey(Project)
+    file_name = models.CharField(max_length=100)
+    file = models.FileField(upload_to='files')
+    creation_date = models.DateField()

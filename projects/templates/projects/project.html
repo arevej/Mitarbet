@@ -5,6 +5,23 @@
 <h2>{{project.project_name}}</h2>
 <p>{{project.creation_date}}</p>
 
+<ul>
+  {% for file in project.file_set.all %}
+    <li>
+      <a href="/{{file.file}}">{{ file.file_name }}</a>
+      <a href="{% url 'delete_file' project.id file.id %}">x</a>
+    </li>
+  {% endfor %}
+</ul>
+
+<form method="post" enctype="multipart/form-data" action="{% url 'add_file' project.id %}">
+  {% csrf_token %}
+  <input type="file" name="file">
+  <input type="text" name="file_name" size="100">
+  <button type="submit">Add file</button>
+
+</form>
+
 <div class="wiki">
   {{ project.wiki | markdown | safe }}
 </div>
