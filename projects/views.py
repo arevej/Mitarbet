@@ -37,7 +37,8 @@ def add_project(request):
 
 def project(request, project_id):
     project = Project.objects.get(pk=project_id)
-    return render(request, 'projects/project.html', {'project': project})
+    is_on_project = project.developers.filter(id=request.user.id).exists()
+    return render(request, 'projects/project.html', {'project': project, 'is_on_project': is_on_project})
 
 def delete_project(request, project_id):
     project = Project.objects.get(pk=project_id)

@@ -12,8 +12,9 @@
   {% for project in all_projects %}
   <li>
     <a href="{% url 'project' project.id %}">{{ project.project_name }}</a>
-    <a href="{% url 'delete_project' project.id %}">x</a>
-
+    {% if request.user.is_staff or request.user.is_superuser %}
+      <a href="{% url 'delete_project' project.id %}">x</a>
+    {% endif %}
     <p>
       {% for tag in project.tag_list %}
         <a href="?query={{ tag }}">{{ tag }}</a>
@@ -26,5 +27,7 @@
   <p> No projects. </p>
 {% endif %}
 
+{% if request.user.is_staff or request.user.is_superuser %}
 <a href="/projects/new">Start project</a>
+{% endif %}
 {% endblock %}

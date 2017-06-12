@@ -19,10 +19,12 @@
     </div>
   {% endfor%}
 </div>
-<form action="{% url 'comment' project.id discussion.id %}" method="post">
-  {% csrf_token %}
-  Comment:<br/>
-  <textarea name="comment_text" rows="8" cols="80"></textarea>
-  <p><button type="submit">Comment</button></p>
-</form>
+{% if is_on_project or equest.user.is_staff or request.user.is_superuser %}
+  <form action="{% url 'comment' project.id discussion.id %}" method="post">
+    {% csrf_token %}
+    Comment:<br/>
+    <textarea name="comment_text" rows="8" cols="80"></textarea>
+    <p><button type="submit">Comment</button></p>
+  </form>
+{% endif%}
 {% endblock %}

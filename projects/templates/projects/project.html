@@ -14,13 +14,14 @@
   {% endfor %}
 </ul>
 
-<form method="post" enctype="multipart/form-data" action="{% url 'add_file' project.id %}">
-  {% csrf_token %}
-  <input type="file" name="file">
-  <input type="text" name="file_name" size="100">
-  <button type="submit">Add file</button>
-
-</form>
+{% if is_on_project or request.user.is_staff or request.user.is_superuser %}
+  <form method="post" enctype="multipart/form-data" action="{% url 'add_file' project.id %}">
+    {% csrf_token %}
+    <input type="file" name="file">
+    <input type="text" name="file_name" size="100">
+    <button type="submit">Add file</button>
+  </form>
+{% endif %}
 
 <div class="wiki">
   {{ project.wiki | markdown | safe }}

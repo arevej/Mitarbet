@@ -4,8 +4,12 @@
 <div class="project-menu">
   <a href="{% url 'project' project.id %}">{{project.project_name}}</a>
   <div>
-    <a href="{% url 'discussion_list' project.id %}">Discussions</a>
-    <a href="{% url 'edit_project' project.id %}">Settings</a>
+    {% if request.user.is_authenticated %}
+      <a href="{% url 'discussion_list' project.id %}">Discussions</a>
+    {% endif %}
+    {% if request.user.is_staff or request.user.is_superuser %}
+      <a href="{% url 'edit_project' project.id %}">Settings</a>
+    {% endif %}
   </div>
 </div>
 {% block project_content %}
