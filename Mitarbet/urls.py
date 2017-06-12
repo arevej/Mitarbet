@@ -24,6 +24,7 @@ from django.conf import settings
 import os
 
 urlpatterns = [
+    url(r'^$', projects_views.news, name='news'),
     url(r'^admin/', admin.site.urls),
     url(r'^login/$', auth_views.login, name='login'),
     url(r'^logout/$', auth_views.logout,{'next_page':'/login'}, name='logout'),

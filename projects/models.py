@@ -23,3 +23,9 @@ class File(models.Model):
     file_name = models.CharField(max_length=100)
     file = models.FileField(upload_to='files')
     creation_date = models.DateField()
+
+class NewsItem(models.Model):
+    user = models.ForeignKey(User)
+    creation_date = models.DateTimeField()
+    project = models.ForeignKey(Project)
+    action = models.CharField(max_length=50) # create_project

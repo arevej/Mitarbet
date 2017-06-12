@@ -5,7 +5,10 @@
 <body {% if request.user.profile.style == 'dark' %} class="dark"{% endif %}>
 <div class="container">
   <div class="top-menu">
-    <a href="/projects">Projects</a>
+    <div>
+      <a href="/">News</a>
+      <a href="/projects">Projects</a>
+    </div>
     <div>
       {% if request.user.is_authenticated %}
         <a href="{% url 'profile' request.user.username %}">{{ request.user.username }}</a>

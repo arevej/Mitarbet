@@ -4,7 +4,7 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.db.models import Q
 from django.contrib.auth.models import User
-from .models import Project, Discussion, Comment, File
+from .models import Project, Discussion, Comment, File, NewsItem
 
 def index(request):
     if 'query' in request.GET:
@@ -29,6 +29,7 @@ def add_project(request):
             if project_name == '':
                 raise Exception('Name cannot be blank')
             project = Project.objects.create(project_name=project_name, creation_date=datetime.datetime.today(), wiki='')
+            NewsItem.objects.create(user=request.user, creation_date=datetime.datetime.today(), project=project, action='create_project')
             return HttpResponseRedirect(reverse('project', args=(project.id,)))
         except Exception as e:
             return render(request, 'projects/new.html', {'error': str(e)})
@@ -107,3 +108,7 @@ def delete_file(request, project_id, file_id):
     file = File.objects.get(pk=file_id)
     file.delete()
     return HttpResponseRedirect(reverse('project', args=(project.id,)))
+
+def news(request):
+    news = NewsItem.objects.order_by('-creation_date')
+    return render(request, 'news/news.html', {'news':news})
