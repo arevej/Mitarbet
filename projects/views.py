@@ -2,11 +2,21 @@ import datetime
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.urls import reverse
+from django.db.models import Q
 from django.contrib.auth.models import User
 from .models import Project, Discussion, Comment, File
 
 def index(request):
-    all_projects = Project.objects.order_by('-creation_date')
+    if 'query' in request.GET:
+        q = request.GET['query']
+        all_projects = Project.objects.filter(
+            Q(project_name__contains=q) |
+            Q(discussion__discussion_name__contains=q) |
+            Q(discussion__comment__comment_text__contains=q) |
+            Q(wiki__contains=q)
+        ).distinct()
+    else:
+        all_projects = Project.objects.order_by('-creation_date')
     context = {'all_projects':all_projects}
     return render(request, 'projects/projects.html', context)
 
