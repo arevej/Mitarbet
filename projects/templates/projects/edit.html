@@ -2,10 +2,12 @@
 
 {% block project_content %}
 
-<form action="{% url 'wiki' project.id %}" method="post">
+<form action="{% url 'edit_project' project.id %}" method="post">
   {% csrf_token %}
   Wiki:<br/>
-  <textarea name="wiki" rows="8" cols="80">{{project.wiki}}</textarea>
+  <textarea name="wiki" rows="8" cols="80">{{project.wiki}}</textarea><br>
+  Tags:
+  <input type="text" name="tags" value="{{project.tags}}">
   <p><button type="submit">Update</button></p>
 </form>
 

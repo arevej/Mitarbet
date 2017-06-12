@@ -13,11 +13,17 @@
   <li>
     <a href="{% url 'project' project.id %}">{{ project.project_name }}</a>
     <a href="{% url 'delete_project' project.id %}">x</a>
+
+    <p>
+      {% for tag in project.tag_list %}
+        <a href="?query={{ tag }}">{{ tag }}</a>
+      {% endfor %}
+    </p>
   </li>
   {% endfor %}
 </ul>
 {% else %}
-<p> No projects. </p>
+  <p> No projects. </p>
 {% endif %}
 
 <a href="/projects/new">Start project</a>

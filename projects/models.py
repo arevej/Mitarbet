@@ -4,9 +4,13 @@ from django.contrib.auth.models import User
 
 class Project(models.Model):
     project_name = models.CharField(max_length=100)
-    wiki = models.CharField(max_length=100000)
+    wiki = models.CharField(max_length=100000, default='')
     creation_date = models.DateField()
     developers = models.ManyToManyField(User)
+    tags = models.CharField(max_length=1000, default='')
+
+    def tag_list(self):
+        return self.tags.split(' ')
 
 class Discussion(models.Model):
     project = models.ForeignKey(Project, on_delete=models.CASCADE)

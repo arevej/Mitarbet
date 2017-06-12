@@ -38,7 +38,6 @@ urlpatterns = [
     url(r'^projects/(?P<project_id>[0-9]+)/files/new/$', projects_views.add_file, name='add_file'),
     url(r'^projects/(?P<project_id>[0-9]+)/files/(?P<file_id>[0-9]+)/delete/$', projects_views.delete_file, name='delete_file'),
     url(r'^projects/(?P<project_id>[0-9]+)/edit/$', projects_views.edit_project, name='edit_project'),
-    url(r'^projects/(?P<project_id>[0-9]+)/edit/wiki$', projects_views.edit_project, name='wiki'),
     url(r'^projects/(?P<project_id>[0-9]+)/developers/$', projects_views.add_developer, name='add_developer'),
     url(r'^projects/(?P<project_id>[0-9]+)/edit/developers/(?P<developer_id>[0-9]+)/delete/$', projects_views.delete_developer, name='delete_developer'),
     url(r'^projects/(?P<project_id>[0-9]+)/discussions/$', projects_views.discussion_list, name='discussion_list'),

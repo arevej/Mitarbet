@@ -13,7 +13,8 @@ def index(request):
             Q(project_name__contains=q) |
             Q(discussion__discussion_name__contains=q) |
             Q(discussion__comment__comment_text__contains=q) |
-            Q(wiki__contains=q)
+            Q(wiki__contains=q) |
+            Q(tags__contains=q)
         ).distinct()
     else:
         all_projects = Project.objects.order_by('-creation_date')
@@ -82,6 +83,8 @@ def edit_project(request, project_id):
         return render(request, 'projects/edit.html', {'project': project, 'all_developers': all_developers})
     else:
         wiki = request.POST['wiki']
+        tags = request.POST['tags']
+        project.tags=tags
         project.wiki=wiki
         project.save()
         return HttpResponseRedirect(reverse('project', args=(project.id,)))
