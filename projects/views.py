@@ -38,6 +38,11 @@ def project(request, project_id):
     project = Project.objects.get(pk=project_id)
     return render(request, 'projects/project.html', {'project': project})
 
+def delete_project(request, project_id):
+    project = Project.objects.get(pk=project_id)
+    project.delete()
+    return HttpResponseRedirect(reverse('projects'))
+
 def discussion_list(request, project_id):
     project = Project.objects.get(pk=project_id)
     all_discussions = project.discussion_set.all()

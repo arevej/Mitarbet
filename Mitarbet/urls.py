@@ -32,6 +32,7 @@ urlpatterns = [
     url(r'^profile/edit/$', views.edit_profile, name='edit_profile'),
     url(r'^profile/(?P<username>[a-zA-Z0-9]+)/$', views.profile, name='profile'),
     url(r'^projects/$', projects_views.index, name='projects'),
+    url(r'^projects/(?P<project_id>[0-9]+)/delete/$', projects_views.delete_project, name='delete_project'),
     url(r'^projects/new/$', projects_views.add_project, name='add_project'),
     url(r'^projects/(?P<project_id>[0-9]+)/$', projects_views.project, name='project'),
     url(r'^projects/(?P<project_id>[0-9]+)/files/new/$', projects_views.add_file, name='add_file'),
