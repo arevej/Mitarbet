@@ -69,6 +69,12 @@ def discussion(request, project_id, discussion_id):
     discussion = Discussion.objects.get(pk=discussion_id)
     return render(request, 'discussions/discussion.html', {'project': project, 'discussion': discussion})
 
+def delete_discussion(request, project_id, discussion_id):
+    project = Project.objects.get(pk=project_id)
+    discussion = Discussion.objects.get(pk=discussion_id)
+    discussion.delete()
+    return HttpResponseRedirect(reverse('discussion_list', args=(project.id,)))
+
 def comment(request, project_id, discussion_id):
     project = Project.objects.get(pk=project_id)
     discussion = Discussion.objects.get(pk=discussion_id)

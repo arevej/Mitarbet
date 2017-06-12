@@ -43,6 +43,7 @@ urlpatterns = [
     url(r'^projects/(?P<project_id>[0-9]+)/discussions/$', projects_views.discussion_list, name='discussion_list'),
     url(r'^projects/(?P<project_id>[0-9]+)/discussions/new/$', projects_views.add_discussion, name='add_discussion'),
     url(r'^projects/(?P<project_id>[0-9]+)/discussions/(?P<discussion_id>[0-9]+)/$', projects_views.discussion, name='discussion'),
+    url(r'^projects/(?P<project_id>[0-9]+)/discussions/(?P<discussion_id>[0-9]+)/delete/$', projects_views.delete_discussion, name='delete_discussion'),
     url(r'^projects/(?P<project_id>[0-9]+)/discussions/(?P<discussion_id>[0-9]+)/comment/$', projects_views.comment, name='comment'),
 ]
 
