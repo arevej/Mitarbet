@@ -12,6 +12,15 @@ class Project(models.Model):
     def tag_list(self):
         return self.tags.split(' ')
 
+    @staticmethod
+    def all_tags():
+        all_tags = []
+        for project in list(Project.objects.all()):
+            for tag in project.tag_list():
+                if (tag in all_tags) == False:
+                    all_tags.append(tag)
+        return all_tags
+
 class Discussion(models.Model):
     project = models.ForeignKey(Project, on_delete=models.CASCADE)
     discussion_name = models.CharField(max_length=100)

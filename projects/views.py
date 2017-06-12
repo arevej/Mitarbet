@@ -126,4 +126,5 @@ def delete_file(request, project_id, file_id):
 
 def news(request):
     news = NewsItem.objects.order_by('-creation_date')
-    return render(request, 'news/news.html', {'news':news})
+    all_tags = Project.all_tags()
+    return render(request, 'news/news.html', {'news':news, 'all_tags':all_tags})

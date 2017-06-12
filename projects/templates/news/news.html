@@ -12,4 +12,8 @@
 {% else %}
   <p>No news.</p>
 {% endif %}
+
+{% for tag in all_tags %}
+  <a href="{% url 'projects' %}?query={{ tag }}">{{ tag }}</a>
+{% endfor %}
 {% endblock %}
