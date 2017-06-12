@@ -2,6 +2,7 @@
 
 <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}" />
 
+<body {% if request.user.profile.style == 'dark' %} class="dark"{% endif %}>
 <div class="container">
   <div class="top-menu">
     <a href="/projects">Projects</a>
@@ -20,3 +21,4 @@
     {% endblock %}
   </div>
 </div>
+</body>

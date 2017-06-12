@@ -33,6 +33,8 @@ def edit_profile(request):
     if request.method == 'GET':
         return render(request, 'profile/edit.html', {'user': user})
     else:
-        user.profile.avatar = request.FILES['avatar']
+        if 'avatar' in request.FILES:
+            user.profile.avatar = request.FILES['avatar']
+        user.profile.style = request.POST['style']
         user.profile.save()
         return HttpResponseRedirect(reverse('profile', args=(user.username,)))

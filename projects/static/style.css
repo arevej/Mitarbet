@@ -3,6 +3,20 @@ body {
   font-family: Helvetica;
 }
 
+.dark {
+  background: #3b3a4a;
+  color: #dccbcb;
+}
+
+.dark a {
+  color: #b38aff;
+  transition: color 0.3s;
+}
+
+.dark a:hover {
+  color: #d1b8ff;
+}
+
 .container {
   width: 1000px;
   margin: 0 auto;

@@ -5,3 +5,4 @@ from annoying.fields import AutoOneToOneField
 class Profile(models.Model):
     user = AutoOneToOneField(User, primary_key=True)
     avatar = models.ImageField(upload_to='images')
+    style = models.CharField(default='light', max_length=5)
