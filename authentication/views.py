@@ -36,5 +36,9 @@ def edit_profile(request):
         if 'avatar' in request.FILES:
             user.profile.avatar = request.FILES['avatar']
         user.profile.style = request.POST['style']
+        user.username = request.POST['username']
+        if request.POST['password'] != '':
+            user.password = request.POST['password']
         user.profile.save()
+        user.save()
         return HttpResponseRedirect(reverse('profile', args=(user.username,)))
