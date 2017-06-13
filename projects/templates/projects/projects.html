@@ -17,7 +17,7 @@
     {% endif %}
     <p>
       {% for tag in project.tag_list %}
-        <a href="?query={{ tag }}">{{ tag }}</a>
+        <a href="?query={{ tag }}">#{{ tag }}</a>
       {% endfor %}
     </p>
   </li>

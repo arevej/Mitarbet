@@ -5,25 +5,37 @@
 <h2>{{project.project_name}}</h2>
 <p>{{project.creation_date}}</p>
 
-<ul>
-  {% for file in project.file_set.all %}
-    <li>
-      <a href="/{{file.file}}">{{ file.file_name }}</a>
-      <a href="{% url 'delete_file' project.id file.id %}">x</a>
-    </li>
-  {% endfor %}
-</ul>
-
-{% if is_on_project or request.user.is_staff or request.user.is_superuser %}
-  <form method="post" enctype="multipart/form-data" action="{% url 'add_file' project.id %}">
-    {% csrf_token %}
-    <input type="file" name="file">
-    <input type="text" name="file_name" size="100">
-    <button type="submit">Add file</button>
-  </form>
-{% endif %}
-
 <div class="wiki">
   {{ project.wiki | markdown | safe }}
 </div>
+
+<div class="files">
+  <div>
+    <ul>
+      Files:
+      {% for file in project.file_set.all %}
+          <li><a href="/{{file.file}}">{{ file.file_name }}</a>
+          <a href="{% url 'delete_file' project.id file.id %}">x</a></li>
+      {% endfor %}
+    </ul>
+  </div>
+  <div>
+    {% if is_on_project or request.user.is_staff or request.user.is_superuser %}
+      <form method="post" enctype="multipart/form-data" action="{% url 'add_file' project.id %}">
+        {% csrf_token %}
+        <input type="file" name="file">
+        <input type="text" name="file_name" size="10">
+        <button type="submit">Add file</button>
+      </form>
+    {% endif %}
+  </div>
+</div>
+
+<div>
+  Developers:
+  {% for developer in project.developers.all %}
+    <a href="{% url 'profile' developer.username %}">{{ developer.username }}</a>
+  {% endfor %}
+</div>
+
 {% endblock %}

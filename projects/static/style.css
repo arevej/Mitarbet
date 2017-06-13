@@ -1,6 +1,13 @@
 body {
   font-size: 22px;
   font-family: Helvetica;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  width: 1000px;
+  margin: 0 auto;
 }
 
 .dark {
@@ -17,31 +24,39 @@ body {
   color: #d1b8ff;
 }
 
-.container {
-  width: 1000px;
-  margin: 0 auto;
+.top-menu {
+  background: rgba(255, 229, 194, 0.10);
+  height: 45px;
 }
 
-.top-menu {
+.top-menu .container {
   font-size: 25px;
-  padding: 10px 0;
+  padding: 10px 0px;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
 a {
-  color: #5400f0;
+  color: #3b00a8;
   text-decoration: none;
   transition: color 0.3s;
 }
 
 a:hover {
-  color: #220061;
+  color: #5000e6;
 }
 
 .project-menu {
   padding: 10px 0;
   display: flex;
   justify-content: space-between;
+}
+
+.news {
+  margin-top: 10px;
+}
+
+.tags {
+  margin-top: 10px;
 }

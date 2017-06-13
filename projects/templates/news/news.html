@@ -1,19 +1,22 @@
 {% extends 'base.html' %}
 
 {% block content %}
-{% if news %}
-  {% for news_item in news %}
-    <div>
-      {% if news_item.action == 'create_project' %}
-        {{ news_item.creation_date }}: <a href="{% url 'profile' news_item.user.username %}">{{ news_item.user.username }}</a> created project <a href="{% url 'project' news_item.project.id %}">{{news_item.project.project_name}}</a>
-      {% endif %}
-    </div>
+<div class="news">
+  {% if news %}
+    {% for news_item in news %}
+      <div>
+        {% if news_item.action == 'create_project' %}
+          {{ news_item.creation_date }}: <a href="{% url 'profile' news_item.user.username %}">{{ news_item.user.username }}</a> created project <a href="{% url 'project' news_item.project.id %}">{{news_item.project.project_name}}</a>
+        {% endif %}
+      </div>
+    {% endfor %}
+  {% else %}
+    <p>No news.</p>
+  {% endif %}
+</div>
+<div class="tags">
+  {% for tag in all_tags %}
+    <a href="{% url 'projects' %}?query={{ tag }}">#{{ tag }}</a>
   {% endfor %}
-{% else %}
-  <p>No news.</p>
-{% endif %}
-
-{% for tag in all_tags %}
-  <a href="{% url 'projects' %}?query={{ tag }}">{{ tag }}</a>
-{% endfor %}
+</div>
 {% endblock %}

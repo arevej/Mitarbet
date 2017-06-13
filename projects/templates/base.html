@@ -3,8 +3,8 @@
 <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}" />
 
 <body {% if request.user.profile.style == 'dark' %} class="dark"{% endif %}>
-<div class="container">
-  <div class="top-menu">
+<div class="top-menu">
+  <div class="container">
     <div>
       <a href="/">News</a>
       <a href="/projects">Projects</a>
@@ -18,10 +18,10 @@
       {% endif %}
     </div>
   </div>
+</div>
 
-  <div>
-    {% block content %}
-    {% endblock %}
-  </div>
+<div class="container">
+  {% block content %}
+  {% endblock %}
 </div>
 </body>
