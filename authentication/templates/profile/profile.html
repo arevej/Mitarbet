@@ -2,27 +2,27 @@
 
 {% block content %}
 
-<h2>Profile</h2>
-{% if user.profile.avatar %}
-  <img src="/{{ user.profile.avatar }}" height="100" width="100">
-{% endif %}
+<h2>{{ user.username }}</h2>
 
-<p>{{ user.username }}</p>
+<div class="avatar">
+  {% if user.profile.avatar %}
+    <img src="/{{ user.profile.avatar }}" height="100" width="100">
+  {% endif %}
+</div>
 
 {% if request.user == user %}
-  <a href="{% url 'edit_profile' %}">Edit profile</a>
+  <a href="{% url 'edit_profile' %}" class="btn">Edit profile</a>
 {% endif %}
 
-
-
 {% if projects.all %}
-<ul>
-  {% for project in projects.all %}
-  <li><a href="/projects/{{ project.id }}">{{ project.project_name }}</a></li>
-  {% endfor %}
-</ul>
+  <h3>Projects:</h3>
+  <ul>
+    {% for project in projects.all %}
+      <li><a href="/projects/{{ project.id }}">{{ project.project_name }}</a></li>
+    {% endfor %}
+  </ul>
 {% else %}
-<p> No projects. </p>
+  <p> No projects. </p>
 {% endif %}
 
 {% endblock %}

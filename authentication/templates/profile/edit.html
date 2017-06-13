@@ -5,12 +5,15 @@
 
 <form method="post" enctype="multipart/form-data">
   {% csrf_token %}
+  <label><input type="text" name="username" value="{{ user.username }}" ></label>
+  <label><input type="text" name="password" value="" placeholder="Password"></label>
+  Avatar:
   <input type="file" accept="image/*" name="avatar">
   <br>
+  Theme:
   <label><input type="radio" name="style" value="light" {% if user.profile.style == 'light' %}checked{% endif %}> Light</label>
-  <br>
   <label><input type="radio" name="style" value="dark" {% if user.profile.style == 'dark' %}checked{% endif %}> Dark</label>
-  <br>
+<br>
   <button type="submit">Save</button>
 </form>
 

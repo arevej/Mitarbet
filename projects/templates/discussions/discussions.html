@@ -7,7 +7,7 @@
 <li>
   <a href="{% url 'discussion' project.id discussion.id %}">{{discussion.discussion_name}}</a>
   {% if request.user.is_staff or request.user.is_superuser %}
-    <a href="{% url 'delete_discussion' project.id discussion.id%}">x</a>
+    <a href="{% url 'delete_discussion' project.id discussion.id%}" class="delete">&times;</a>
   {% endif %}
 </li>
 {% endfor %}

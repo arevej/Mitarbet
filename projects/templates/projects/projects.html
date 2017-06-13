@@ -13,11 +13,11 @@
   <li>
     <a href="{% url 'project' project.id %}">{{ project.project_name }}</a>
     {% if request.user.is_staff or request.user.is_superuser %}
-      <a href="{% url 'delete_project' project.id %}">x</a>
+      <a href="{% url 'delete_project' project.id %}" class="delete">x</a>
     {% endif %}
     <p>
       {% for tag in project.tag_list %}
-        <a href="?query={{ tag }}">#{{ tag }}</a>
+        <a href="?query={{ tag }}" class="tags">#{{ tag }}</a>
       {% endfor %}
     </p>
   </li>
@@ -28,6 +28,6 @@
 {% endif %}
 
 {% if request.user.is_staff or request.user.is_superuser %}
-<a href="/projects/new">Start project</a>
+  <a class="btn" href="/projects/new">+ Start project</a>
 {% endif %}
 {% endblock %}
