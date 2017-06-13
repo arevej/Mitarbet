@@ -91,6 +91,7 @@ def edit_project(request, project_id):
     else:
         wiki = request.POST['wiki']
         tags = request.POST['tags']
+        project.project_name = request.POST['project_name']
         project.tags=tags
         project.wiki=wiki
         project.save()
